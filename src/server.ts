@@ -8,7 +8,13 @@ app.use(express.json());
 
 // Unversioned health check — useful for load balancers and uptime monitors
 app.get('/health', (_req: Request, res: Response) => {
-  res.status(200).json({ status: 'OK', timestamp: new Date().toISOString() });
+  res
+    .status(200)
+    .json({
+      status: 'OK',
+      timestamp: new Date().toISOString(),
+      service: 'Habit Tracker API',
+    });
 });
 
 app.use('/api/v1', v1Router);
