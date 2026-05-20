@@ -6,9 +6,20 @@ import {
   timestamp,
   boolean,
   integer,
+  pgEnum,
 } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
-import { frequencyEnum } from './schema.utils.ts';
+
+// **********************************
+// ************ TYPES ***************
+// **********************************
+
+export const frequencyEnum = pgEnum('frequency', [
+  'daily',
+  'weekly',
+  'monthly',
+  'yearly',
+]);
 
 // **********************************
 // ************ TABLES **************
