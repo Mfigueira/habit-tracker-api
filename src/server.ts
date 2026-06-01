@@ -5,6 +5,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import { isDevelopment, isTesting } from '../env.ts';
+import { notFoundHandler, globalErrorHandler } from './middleware/error.ts';
 
 const app = express();
 
@@ -33,5 +34,11 @@ app.get('/health', (_req: Request, res: Response) => {
 });
 
 app.use('/api/v1', v1Router);
+
+// 404 handler
+app.use(notFoundHandler);
+
+// Global error handler
+app.use(globalErrorHandler);
 
 export default app;
