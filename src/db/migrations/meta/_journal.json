@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1779304627429,
-      "tag": "0000_complete_the_call",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1780328569753,
-      "tag": "0001_mean_speed",
+      "when": 1780349980352,
+      "tag": "0000_dark_bishop",
       "breakpoints": true
     }
   ]
