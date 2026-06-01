@@ -1,15 +1,22 @@
 import { SignJWT, jwtVerify } from 'jose';
 import { createSecretKey } from 'crypto';
+import { z } from 'zod';
 import env from '../../env.ts';
 
-export interface JWTPayload {
-  id: string;
-  email: string;
-  username: string;
-}
+const jwtPayloadSchema = z.object({
+  id: z.string(),
+  email: z.string(),
+  username: z.string(),
+});
+
+export type JWTPayload = z.infer<typeof jwtPayloadSchema>;
+
+const generateSecretKey = () => {
+  return createSecretKey(env.JWT_SECRET, 'utf-8');
+};
 
 export const generateToken = async (payload: JWTPayload): Promise<string> => {
-  const secretKey = createSecretKey(env.JWT_SECRET, 'utf-8');
+  const secretKey = generateSecretKey();
 
   const token = await new SignJWT({
     id: payload.id,
@@ -25,14 +32,9 @@ export const generateToken = async (payload: JWTPayload): Promise<string> => {
 };
 
 export const verifyToken = async (token: string): Promise<JWTPayload> => {
-  const secretKey = createSecretKey(env.JWT_SECRET, 'utf-8');
+  const secretKey = generateSecretKey();
+
   const { payload } = await jwtVerify(token, secretKey);
 
-  const verifiedPayload = {
-    id: payload.id as string,
-    email: payload.email as string,
-    username: payload.username as string,
-  };
-
-  return verifiedPayload;
+  return jwtPayloadSchema.parse(payload);
 };
