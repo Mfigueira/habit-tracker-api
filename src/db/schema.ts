@@ -14,12 +14,14 @@ import { relations } from 'drizzle-orm';
 // ************ TYPES ***************
 // **********************************
 
-export const frequencyEnum = pgEnum('frequency', [
+export const FREQUENCY_VALUES = [
   'daily',
   'weekly',
   'monthly',
   'yearly',
-]);
+] as const;
+
+export const frequencyEnum = pgEnum('frequency', FREQUENCY_VALUES);
 
 // **********************************
 // ************ TABLES **************
