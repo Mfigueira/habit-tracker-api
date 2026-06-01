@@ -1,37 +1,41 @@
 import { Router } from 'express';
 import { authenticateToken } from '../../middleware/auth.ts';
+import {
+  createHabit,
+  createHabitSchema,
+  deleteHabitById,
+  getHabitById,
+  getUserHabits,
+  updateHabitById,
+  habitIdSchema,
+  completeHabit,
+  getHabitsByTag,
+  tagIdSchema,
+  addTagsToHabit,
+  removeTagFromHabit,
+} from '../../controllers/habit-controller.ts';
+import { validateBody, validateParams } from '../../middleware/validation.ts';
 
 const habitRouter = Router();
 
 // Authenticate all habit routes
 habitRouter.use(authenticateToken);
 
-habitRouter.get('/', (req, res) => {
-  res.status(200).json({ message: 'All habits fetched successfully' });
-});
+habitRouter.get('/', getUserHabits);
 
-habitRouter.post('/', (req, res) => {
-  res.status(201).json({ message: 'Habit created successfully' });
-});
+habitRouter.post('/', validateBody(createHabitSchema), createHabit);
 
-habitRouter.get('/:id', (req, res) => {
-  res.status(200).json({ message: 'Habit fetched successfully' });
-});
+habitRouter.get('/:id', validateBody(habitIdSchema), getHabitById);
 
-habitRouter.put('/:id', (req, res) => {
-  res.status(200).json({ message: 'Habit updated successfully' });
-});
+habitRouter.put('/:id', validateParams(habitIdSchema), updateHabitById);
 
-habitRouter.delete('/:id', (req, res) => {
-  res.status(200).json({ message: 'Habit deleted successfully' });
-});
+habitRouter.delete('/:id', validateParams(habitIdSchema), deleteHabitById);
 
-habitRouter.post('/:id/complete', (req, res) => {
-  res.status(201).json({ message: 'Habit completed successfully' });
-});
+habitRouter.post('/:id/complete', validateParams(habitIdSchema), completeHabit);
 
-habitRouter.get('/:id/stats', (req, res) => {
-  res.status(200).json({ message: 'Habit stats fetched successfully' });
-});
+// Tag-related endpoints
+habitRouter.get('/tag/:tagId', validateParams(tagIdSchema), getHabitsByTag);
+habitRouter.post('/:id/tags', validateParams(habitIdSchema), addTagsToHabit);
+habitRouter.delete('/:id/tags/:tagId', removeTagFromHabit);
 
 export default habitRouter;
