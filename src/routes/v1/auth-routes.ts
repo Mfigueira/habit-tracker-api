@@ -3,7 +3,7 @@ import {
   login,
   loginUserSchema,
   register,
-} from '../../controllers/authController.ts';
+} from '../../controllers/auth-controller.ts';
 import { validateBody } from '../../middleware/validation.ts';
 import { insertUserSchema } from '../../db/schema.types.ts';
 
