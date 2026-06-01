@@ -1,11 +1,16 @@
 import type { InferSelectModel, InferInsertModel } from 'drizzle-orm';
 import { createSelectSchema, createInsertSchema } from 'drizzle-zod';
+import { z } from 'zod';
 import { users, habits, entries, tags, habitTags } from './schema.ts';
 
 export type User = InferSelectModel<typeof users>;
 export type NewUser = InferInsertModel<typeof users>;
 export const selectUserSchema = createSelectSchema(users);
-export const insertUserSchema = createInsertSchema(users);
+export const insertUserSchema = createInsertSchema(users, {
+  email: z.email(),
+  password: z.string().min(8),
+  username: z.string().min(1).max(50),
+});
 
 export type Habit = InferSelectModel<typeof habits>;
 export type NewHabit = InferInsertModel<typeof habits>;
