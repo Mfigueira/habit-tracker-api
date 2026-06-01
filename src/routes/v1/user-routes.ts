@@ -1,6 +1,10 @@
 import { Router } from 'express';
+import { authenticateToken } from '../../middleware/auth.ts';
 
 const userRouter = Router();
+
+// Authenticate all user routes
+userRouter.use(authenticateToken);
 
 userRouter.get('/profile', (req, res) => {
   res.status(200).json({ message: 'User profile fetched successfully' });

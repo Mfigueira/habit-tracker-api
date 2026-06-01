@@ -1,6 +1,10 @@
 import { Router } from 'express';
+import { authenticateToken } from '../../middleware/auth.ts';
 
 const habitRouter = Router();
+
+// Authenticate all habit routes
+habitRouter.use(authenticateToken);
 
 habitRouter.get('/', (req, res) => {
   res.status(200).json({ message: 'All habits fetched successfully' });
