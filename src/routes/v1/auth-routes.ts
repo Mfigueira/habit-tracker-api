@@ -1,13 +1,16 @@
 import { Router } from 'express';
+import {
+  login,
+  loginUserSchema,
+  register,
+} from '../../controllers/authController.ts';
+import { validateBody } from '../../middleware/validation.ts';
+import { insertUserSchema } from '../../db/schema.types.ts';
 
 const authRouter = Router();
 
-authRouter.post('/register', (req, res) => {
-  res.status(201).json({ message: 'User registered successfully' });
-});
+authRouter.post('/register', validateBody(insertUserSchema), register);
 
-authRouter.post('/login', (req, res) => {
-  res.status(200).json({ message: 'Login successful' });
-});
+authRouter.post('/login', validateBody(loginUserSchema), login);
 
 export default authRouter;
