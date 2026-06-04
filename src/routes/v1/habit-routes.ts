@@ -38,4 +38,4 @@ habitRouter.get('/tag/:tagId', validateParams(tagIdSchema), getHabitsByTag);
 habitRouter.post('/:id/tags', validateParams(habitIdSchema), addTagsToHabit);
 habitRouter.delete('/:id/tags/:tagId', removeTagFromHabit);
 
-export default habitRouter;
+export { habitRouter };

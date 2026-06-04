@@ -13,4 +13,4 @@ authRouter.post('/register', validateBody(insertUserSchema), register);
 
 authRouter.post('/login', validateBody(loginUserSchema), login);
 
-export default authRouter;
+export { authRouter };

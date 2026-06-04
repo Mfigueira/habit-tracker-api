@@ -1,6 +1,6 @@
 import request from 'supertest';
-import app from '../server.ts';
-import env from '../../env.ts';
+import { app } from '../server.ts';
+import { env } from '../../env.ts';
 import { afterEach } from 'vitest';
 import { createTestUser, cleanupDatabase } from './helpers/db.helpers.ts';
 

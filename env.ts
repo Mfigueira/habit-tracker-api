@@ -42,4 +42,4 @@ if (!parsedEnv.success) {
 
 env = parsedEnv.data;
 
-export default env;
+export { env };

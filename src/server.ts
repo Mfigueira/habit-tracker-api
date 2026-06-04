@@ -1,6 +1,6 @@
 import express from 'express';
 import type { Request, Response } from 'express';
-import v1Router from './routes/v1/index.ts';
+import { v1Router } from './routes/v1/index.ts';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -41,4 +41,4 @@ app.use(notFoundHandler);
 // Global error handler
 app.use(globalErrorHandler);
 
-export default app;
+export { app };

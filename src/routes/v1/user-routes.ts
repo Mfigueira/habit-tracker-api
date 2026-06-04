@@ -18,4 +18,4 @@ userRouter.put('/password', (req, res) => {
   res.status(200).json({ message: 'User password updated successfully' });
 });
 
-export default userRouter;
+export { userRouter };

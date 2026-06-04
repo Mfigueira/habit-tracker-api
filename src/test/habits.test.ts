@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from '../server.ts';
+import { app } from '../server.ts';
 import { afterEach } from 'vitest';
 import {
   createTestUser,
