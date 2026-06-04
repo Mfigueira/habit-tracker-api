@@ -1,0 +1,23 @@
+---
+description: Enforce named exports over default exports in TypeScript files
+globs: **/*.ts
+alwaysApply: false
+---
+
+# Named Exports
+
+Always use named exports. Avoid default exports in TypeScript files.
+
+```typescript
+// ❌ BAD
+export default class AuthController { ... }
+export default function login() { ... }
+export default { login, register };
+
+// ✅ GOOD
+export class AuthController { ... }
+export function login() { ... }
+export { login, register };
+```
+
+Named exports improve discoverability, enable better IDE auto-imports, and prevent accidental renaming at the import site.
